@@ -1,27 +1,54 @@
 # panelmark-html
 
-The static HTML/CSS rendering layer. Renders a panelmark shell into an HTML structure with stable hooks and layout classes. Serves as the DOM substrate on which `panelmark-web` builds live sessions.
+**panelmark-html** is the static HTML/CSS renderer for panelmark. Given a panelmark shell and its assigned interactions, it produces an HTML document or fragment representing the shell's panel structure.
+
+It is the structural foundation that `panelmark-web` builds live interactivity on top of.
 
 ## What it provides
 
-- renders shell structure into HTML
-- emits stable panel hooks and layout classes
-- provides base CSS for shell structure
-- defines the hook contract consumed by `panelmark-web`
+- Renders shell structure into HTML with stable panel hooks and layout classes
+- Emits base CSS for shell structure (`get_base_css()`)
+- Defines the hook contract — stable DOM attributes and CSS classes — consumed by `panelmark-web`
+- Supports server-side rendering into Flask/Django templates, reports, and dashboards
+
+**Public API:** `render_fragment`, `render_document`, `get_base_css`, `HTMLRenderer`
 
 ## What it does not include
 
-- browser event handling
-- live interaction runtime
-- server or session management
+- Browser event handling, keyboard or mouse input, focus transitions
+- HTTP routes, WebSockets, or session management
+- Rendering of interaction-internal state (item lists, form fields, text content) — panel bodies are empty placeholders with stable DOM hooks; filling them in with live content is `panelmark-web`'s job
+- Any JavaScript requirement for its output to be valid HTML
 
 ## Who should use it
 
-- authors building static HTML output from panelmark shells
-- `panelmark-web` (as a dependency)
-- renderer authors who want to understand the HTML substrate
+- Application authors doing **server-side rendering** into HTML templates without a live browser session
+- Authors generating **static dashboards or reports** from panelmark shell layouts
+- **panelmark-web** (as a dependency — you typically don't need to install it directly when using `panelmark-web`)
+- Renderer authors or testers who want to snapshot-test rendered HTML output
 
-Application authors building live browser applications should use `panelmark-web` rather than `panelmark-html` directly.
+## Current status
+
+**Pre-alpha.** The public Python API and higher-level rendering features may still evolve.
+
+The **hook contract** — the region-level DOM hooks (`data-pm-region`, `id`, `data-pm-*` attributes) and CSS classes (`.pm-shell`, `.pm-split-*`, `.pm-panel`, `.pm-panel-body`) — is the intended stable substrate for `panelmark-web` and will not change without a major version bump.
+
+## Installation
+
+```
+pip install panelmark-html
+```
+
+Dependencies: `panelmark`. No web framework dependency. No JavaScript build step.
+
+## Relationship to panelmark-web
+
+| Package | Role |
+|---------|------|
+| **panelmark-html** | Static structure: panel layout, borders, headings, stable DOM hooks |
+| **panelmark-web** | Live layer: browser events, interaction rendering, WebSocket sessions |
+
+`panelmark-web` depends on `panelmark-html` for its rendered structure. The DOM hooks and CSS classes defined here are the stable contract between the two packages.
 
 ## Detailed docs
 
@@ -33,3 +60,4 @@ Application authors building live browser applications should use `panelmark-web
 
 - [panelmark-web](panelmark-web.md)
 - [Ecosystem](../ecosystem.md)
+- [panelmark core](panelmark.md)
