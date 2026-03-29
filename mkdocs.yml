@@ -1,0 +1,51 @@
+site_name: panelmark
+site_description: Documentation for the panelmark ecosystem
+site_url: https://panelmark.readthedocs.io/
+
+theme:
+  name: material
+
+docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Ecosystem: ecosystem.md
+  - Glossary: glossary.md
+  - Shell Language:
+      - Overview: shell-language/overview.md
+      - Syntax: shell-language/syntax.md
+      - Examples: shell-language/examples.md
+  - Renderer Spec:
+      - Overview: renderer-spec/overview.md
+      - Contract: renderer-spec/contract.md
+      - Portable Library: renderer-spec/portable-library.md
+      - Extensions: renderer-spec/extensions.md
+      - Readiness: renderer-spec/readiness.md
+  - Packages:
+      - panelmark: packages/panelmark.md
+      - panelmark-tui: packages/panelmark-tui.md
+      - panelmark-html: packages/panelmark-html.md
+      - panelmark-web: packages/panelmark-web.md
+  - panelmark-tui:
+      - Getting Started: panelmark-tui/getting-started.md
+      - Interactions: panelmark-tui/interactions.md
+      - Widgets: panelmark-tui/widgets.md
+      - Renderer Implementation: panelmark-tui/renderer-implementation.md
+      - Limitations: panelmark-tui/limitations.md
+  - panelmark-html:
+      - Overview: panelmark-html/overview.md
+      - Rendering API: panelmark-html/rendering-api.md
+      - Hook Contract: panelmark-html/hook-contract.md
+  - panelmark-web:
+      - Overview: panelmark-web/overview.md
+      - Getting Started: panelmark-web/getting-started.md
+      - Protocol: panelmark-web/protocol.md
+      - Hook Usage: panelmark-web/hook-usage.md
+      - Interaction Coverage: panelmark-web/interaction-coverage.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
