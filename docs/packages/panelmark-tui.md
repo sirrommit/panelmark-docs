@@ -7,11 +7,13 @@
 | Component | Description |
 |-----------|-------------|
 | `Shell` | Fullscreen terminal event loop (`run()`) and modal overlay loop (`run_modal()`) |
-| 12 built-in interactions | `MenuFunction`, `MenuReturn`, `TextBox`, `ListView`, `CheckBox`, `Function`, `FormInput`, `DataclassFormInteraction`, `StatusMessage`, `TreeView`, `RadioList`, `TableView` |
-| 10 built-in widgets | `Confirm`, `Alert`, `InputPrompt`, `ListSelect`, `FilePicker`, `DatePicker`, `Progress`, `Toast`, `Spinner`, `DataclassForm` |
+| 8 portable interactions | `MenuReturn`, `NestedMenu`, `RadioList`, `CheckBox`, `TextBox`, `FormInput`, `DataclassFormInteraction`, `StatusMessage` — constructor and value semantics are standardized across compliant renderers |
+| 5 TUI-only interactions | `MenuFunction`, `ListView`, `TreeView`, `TableView`, `Function` — renderer-specific, not guaranteed portable |
+| 6 portable widgets | `Confirm`, `Alert`, `InputPrompt`, `ListSelect`, `FilePicker`, `DataclassForm` — standardized across compliant renderers |
+| 4 TUI-only widgets | `DatePicker`, `Progress`, `Toast`, `Spinner` — renderer-specific additions |
 | Testing utilities | `MockTerminal`, `make_key` — for test suites that don't need a real terminal |
 
-All 8 required portable interactions and all 6 required portable widgets from the [Portable Library](../renderer-spec/portable-library.md) spec are implemented.
+`panelmark-tui` is **`portable-library-compatible`**: it provides TUI-specific implementations of the portable interaction and widget contracts. Portable does not mean renderer-neutral code — it means constructor and semantic compatibility. See [Renderer Implementation](../panelmark-tui/renderer-implementation.md) for the precise framing.
 
 ## What it does not include
 
