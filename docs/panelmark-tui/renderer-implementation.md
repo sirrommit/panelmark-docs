@@ -30,6 +30,12 @@ panelmark_tui/
 
 `render_region` builds a `RenderContext` via `context.py`, calls `interaction.render(context, focused)`, and passes the resulting command list to `TUICommandExecutor`.
 
+### Border rendering
+
+`_render_structure()` recurses through the `LayoutModel` tree and calls `draw_border()` for each `HSplit` border line. `draw_border()` renders the full-width horizontal rule using Unicode box-drawing characters (`─`/`═`), computing correct corner and junction characters based on adjacent vertical dividers. When the border carries a title, it is rendered centred in the line using `render_styled()` to support `<bold>`/colour markup.
+
+Panel headings (`Region.heading`, set via `__text__` in the shell definition) are drawn by `_render_panel_heading()` as a `├─── Heading ───┤` sub-border on the top row of the panel's content area. `render_region` shrinks the region height by 1 and offsets the content region down by 1 row before passing it to the interaction.
+
 ### Draw command execution
 
 `executor.py` provides `TUICommandExecutor`, which translates each `DrawCommand` into terminal escape sequences via `blessed`. It maps region-relative coordinates to screen-absolute coordinates.
@@ -62,6 +68,7 @@ These are the `panelmark.Shell` attributes that `panelmark-tui` accesses directl
 | `shell._dirty` | `set[str]` | Region names needing re-render |
 | `shell.handle_key(key)` | method | Returns `('exit', value)` or `('continue', None)` |
 | `shell.layout` | `LayoutModel` | The parsed layout tree |
+| `shell.borders` | `list[BorderSpec]` | Internal separator lines resolved from the layout tree |
 
 ## Built-in interactions
 

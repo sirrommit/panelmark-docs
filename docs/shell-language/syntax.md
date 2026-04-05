@@ -30,7 +30,7 @@ A **horizontal split** (top/bottom) is produced by a **border row** — a line w
 |----------------|     ← single-line style  (- characters)
 ```
 
-The first such row found splits the definition into a `top` block (all lines above it) and a `bottom` block (all lines below it). The border is rendered as a full-width horizontal rule.
+The first such row found splits the definition into a `top` block (all lines above it) and a `bottom` block (all lines below it). The border is rendered as a full-width horizontal rule by every compliant renderer. Renderers access border data via `shell.borders`, which returns a list of `BorderSpec` objects — one per internal separator — each carrying its row, column, width, style, and optional title.
 
 **Optional title** — text anywhere in the border row (between the fill characters) becomes the border's title, rendered centred:
 
@@ -132,7 +132,10 @@ Percentages are computed relative to the available content width (terminal width
 
 ### Heading
 
-`__text__` inside the block attaches a heading string to the panel. The heading is rendered as a centred title in a single-line `├─── Heading ───┤` border at the top of the panel's content area, consuming one row of the panel's height.
+`__text__` inside the block attaches a heading string to the panel. The string is stored in `Region.heading` and passed to the renderer, which displays it at the top of the panel's content area. The visual form depends on the renderer:
+
+- **panelmark-tui** — draws a `├─── Heading ───┤` sub-border on the first row of the region, consuming one row of the panel's height.
+- **panelmark-html** — emits a `<header class="pm-panel-heading">` element above the panel body.
 
 ```
 |{__Navigation__ $sidebar$}|

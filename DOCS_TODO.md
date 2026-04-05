@@ -23,35 +23,29 @@ Each renderer must consume `shell.borders` and draw the lines.  See
 
 ### Docs to update once both renderers implement border rendering
 
-- [ ] **`docs/shell-language/syntax.md`** — the section beginning
-  "The first such row found splits the definition…" currently says borders are
-  "rendered as a full-width horizontal rule" but this was aspirational.  Once
-  renderers implement it, verify that statement is accurate and add a note
+- [x] **`docs/shell-language/syntax.md`** — confirmed accurate; added note
   that `Shell.borders` is how renderers receive the data.
 
-- [ ] **`docs/shell-language/syntax.md`** — the quick-reference table near the
-  bottom already lists `=== Title ===` and `--- Details ---` correctly.  No
-  change needed there unless wording is improved.
+- [x] **`docs/shell-language/syntax.md`** — quick-reference table already
+  correct; no change needed.
 
-- [ ] **`docs/shell-language/overview.md`** — if it mentions borders, check
-  that it does not imply borders were always rendered.
+- [x] **`docs/shell-language/overview.md`** — added `Shell.borders` to the
+  state machine table.
 
-- [ ] **`docs/panelmark-tui/renderer-implementation.md`** — add a short section
-  explaining that `shell.borders` is read after layout resolution and each
-  `BorderSpec` is drawn before (or after) rendering interactions.
+- [x] **`docs/panelmark-tui/renderer-implementation.md`** — added Border
+  rendering and Panel heading sections; added `shell.borders` to API surface
+  table.
 
-- [ ] **`docs/panelmark-html/`** (equivalent renderer-implementation page,
-  once that section exists) — same treatment for the HTML renderer.
+- [x] **`docs/panelmark-html/rendering-api.md`** — added border elements to
+  the "What is rendered" table.
 
 ### Docs to update once `panelmark-tui` implements borders
 
-- [ ] **`docs/panelmark-tui/renderer-implementation.md`** — mark border
-  rendering as implemented; describe the `TUICommandExecutor` / `BorderSpec`
-  flow if relevant.
+- [x] **`docs/panelmark-tui/renderer-implementation.md`** — done above.
 
 ### Docs to update once `panelmark-html` implements borders
 
-- [ ] **`docs/panelmark-html/`** — mark border rendering as implemented.
+- [x] **`docs/panelmark-html/rendering-api.md`** — done above.
 
 ---
 
@@ -72,17 +66,14 @@ The docs are currently ahead of the implementation.
 
 ### Immediate fix (no renderer change needed)
 
-- [ ] **`docs/shell-language/syntax.md`** — add a note to the `__text__`
-  paragraph marking it as "not yet rendered by any current renderer" or move
-  it to a "planned features" section, so the docs do not document unimplemented
-  behaviour as if it works.
+- [x] **`docs/shell-language/syntax.md`** — both renderers already implement
+  `Region.heading`. Docs updated to describe the actual renderer-specific
+  visual forms (TUI: `├─── Heading ───┤` sub-border; HTML: `<header>`).
 
 ### Once a renderer implements `Region.heading`
 
-- [ ] Remove the caveat and restore the full description with an example.
-- [ ] Update the renderer's implementation page to describe how `Region.heading`
-  is consumed (typically: reserve the first row, draw the heading text centred,
-  pass `context` with `height - 1` to the interaction).
+- [x] Both renderers implement it. Description updated in `syntax.md` and
+  `renderer-implementation.md`.
 
 ---
 
@@ -91,10 +82,8 @@ The docs are currently ahead of the implementation.
 Once border rendering is live in at least one renderer, add `Shell.borders` to
 whichever page documents the `Shell` public API:
 
-- [ ] **`docs/shell-language/overview.md`** or wherever `Shell.regions`,
-  `Shell.dirty_regions`, etc. are listed — add `Shell.borders` with a one-line
-  description: "read-only list of `BorderSpec` objects for all internal
-  separator lines; updated whenever the layout is resolved."
+- [x] **`docs/shell-language/overview.md`** — `Shell.borders` and
+  `Shell.regions` added to the state machine table.
 
 ---
 

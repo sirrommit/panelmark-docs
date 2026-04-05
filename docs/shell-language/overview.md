@@ -43,6 +43,8 @@ Once parsed, a `Shell` instance manages the layout and routes input to interacti
 | `shell.handle_key(key)` | Dispatch a key event; returns `('exit', value)` or `('continue', None)` |
 | `shell.dirty_regions` | Set of region names that need re-rendering |
 | `shell.mark_all_clean()` | Clear the dirty set after rendering |
+| `shell.regions` | Dict of region names → `Region` (row, col, width, height, heading) |
+| `shell.borders` | List of `BorderSpec` objects for every internal separator line; updated on each layout resolution |
 
 ### Built-in key bindings
 

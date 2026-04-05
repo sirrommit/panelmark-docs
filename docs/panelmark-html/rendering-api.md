@@ -169,6 +169,8 @@ panel containers, and headings. They do **not** render interaction content insid
 | Split containers (`pm-split-h`, `pm-split-v`) | Form field values |
 | Panel elements with stable hooks | Text box contents |
 | Panel headings (`pm-panel-heading`) | Focused state transitions |
+| HSplit border lines (`pm-border`, `pm-border-single/double`) | |
+| Border titles (`pm-border-title`) | |
 | Interaction metadata attributes (`data-pm-interaction`, etc.) | |
 | Empty panel body placeholder (`pm-panel-body`) | |
 
